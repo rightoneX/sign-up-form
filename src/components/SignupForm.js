@@ -1,10 +1,10 @@
 import React from 'react'
-import '../App.scss';
 import { useState } from "react";
 import { validationPassword, validationEmail } from '../utilities/inputValidation.js';
-import InputField from '../components/InputField';
-import SubmitButton from '../components/SubmitButton';
+import InputField from './InputField.js';
+import SubmitButton from './SubmitButton.js';
 import Const from '../Constants.js';
+import SuccessMessage from './SuccessMessage.js';
 
 function SignupForm() {
   const [errors, setErrors] = useState({});
@@ -19,6 +19,7 @@ function SignupForm() {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
+
 
   const validateForm = () => {
     let isValid = true;
@@ -48,22 +49,19 @@ function SignupForm() {
     e.preventDefault();
 
     if (validateForm()) {
-      setSubmitted(true); 
+      setSubmitted(true);
       console.log("Form data:", inputs);
-    } 
+    }
   };
 
   return (
-    <div>
-      <div className="background">
-        <div className="shape"></div>
-        <div className="shape"></div>
-      </div>
-
-      {submitted && (<div className="success">{Const.SUCCESS_MESSAGE}</div>)}
+    <>
+      {submitted && (
+        <SuccessMessage
+          message={Const.SUCCESS_MESSAGE}
+        />)}
 
       <form onSubmit={handleSubmit} data-testid="form">
-
         <h2>{Const.FORM_SIGN_UP_TITLE}</h2>
 
         <InputField
@@ -99,8 +97,7 @@ function SignupForm() {
         />
 
       </form >
-
-    </div >
+    </>
   )
 }
 
