@@ -1,5 +1,5 @@
 import React from 'react'
-import '../App.css';
+import '../App.scss';
 import { useState } from "react";
 import { validationPassword, validationEmail } from '../utilities/inputValidation.js';
 import InputField from '../components/InputField';

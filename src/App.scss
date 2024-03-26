@@ -1,13 +1,10 @@
-:root {
-  --main-bg-color: #242629;
-  --error-message-text-color: #f73008;
-  --success-message-bg-color: #03960f;
-  --shape1-bg-color-first: #03960f;
-  --shape1-bg-color-second: #41df4e;
-  --shape2-bg-color-first: #e45336;
-  --shape2-bg-color-second: #f19007;
-}
-
+$main-bg-color: #242629;
+$error-message-text-color: #f73008;
+$success-message-bg-color: #03960f;
+$shape1-bg-color-first: #03960f;
+$shape1-bg-color-second: #41df4e;
+$shape2-bg-color-first: #e45336;
+$shape2-bg-color-second: #f19007;
 
 *,
 *:before,
@@ -18,7 +15,7 @@
 }
 
 body {
-  background-color: var(--main-bg-color);
+  background-color: $main-bg-color;
 }
 
 .background {
@@ -38,26 +35,26 @@ body {
 }
 
 .shape:first-child {
-  background: linear-gradient(var(--shape1-bg-color-first), var(--shape1-bg-color-second));
+  background: linear-gradient($shape1-bg-color-first, $shape1-bg-color-second);
   left: -120px;
   top: -25px;
 }
 
 .shape:last-child {
-  background: linear-gradient(to right, var(--shape2-bg-color-first), var(--shape2-bg-color-second));
+  background: linear-gradient(to right, $shape2-bg-color-first, $shape2-bg-color-second);
   right: -30px;
   bottom: -80px;
 }
 
 .error {
   padding: 5px 0px;
-  color: var(--error-message-text-color);
+  color: $error-message-text-color;
 }
 
 .success {
   height: min-content;
   width: auto;
-  background-color: var(--success-message-bg-color);
+  background-color: $success-message-bg-color;
   position: absolute;
   transform: translate(-50%, -50%);
   top: 10%;
@@ -130,7 +127,7 @@ input {
 
 
 .error-input {
-  border: 1px solid var(--error-message-text-color);
+  border: 1px solid $error-message-text-color;
 }
 
 ::placeholder {
