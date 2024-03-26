@@ -1,21 +1,20 @@
 import { render, screen, fireEvent,  cleanup } from '@testing-library/react';
-import App from './App';
+import SignupForm from './pages/SignupForm';
 
 afterEach(cleanup);
 
 test('Initializes empty form', () => {
-  render(<App />);
+  render(<SignupForm />);
 
   expect(screen.getByText('Sign Up')).toBeInTheDocument();
   expect(screen.getByPlaceholderText('Enter Email Address')).toBeInTheDocument();
   expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
   expect(screen.getByPlaceholderText('Confirm Password')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'Create Account' })).toBeInTheDocument();
-  expect(screen.getByText('Already have account?')).toBeInTheDocument();
 })
 
 test('fill up the form', () => {
-  render(<App />);
+  render(<SignupForm />);
   
   // const email = 'test@example.com'
   const email = 'testexample.com'
@@ -39,14 +38,13 @@ test('fill up the form', () => {
 
   fireEvent.click(submitButton);
 
-  const emailError = document.getElementsByClassName('email-error');
-  expect(emailError.item(0).textContent).toEqual('- Please enter a valid email');
+  const emailError = screen.getByText(/Please enter a valid email/i)
+  expect(emailError).toBeInTheDocument();
 
-  const passwordError = document.getElementsByClassName('password-error');
-  expect(passwordError.item(0).textContent).toEqual('- Password must have at least one capital letter, one numeric character, and one special character');
+  const passwordError = screen.getByText(/must have at least one capital letter, one numeric character, and one special character/i)
+  expect(passwordError).toBeInTheDocument();
 
-  const crfmPasswordError = document.getElementsByClassName('cfrm-password-error');
-  expect(crfmPasswordError.item(0).textContent).toEqual('- Confirmed Password must be the same as the password');
-
+  const confirmPasswordError = screen.getByText(/Must be the same as the password/i)
+  expect(confirmPasswordError).toBeInTheDocument();
 })
 

@@ -1,3 +1,14 @@
+:root {
+  --main-bg-color: #242629;
+  --error-message-text-color: #f73008;
+  --success-message-bg-color: #03960f;
+  --shape1-bg-color-first: #03960f;
+  --shape1-bg-color-second: #41df4e;
+  --shape2-bg-color-first: #e45336;
+  --shape2-bg-color-second: #f19007;
+}
+
+
 *,
 *:before,
 *:after {
@@ -7,7 +18,7 @@
 }
 
 body {
-  background-color: #242629;
+  background-color: var(--main-bg-color);
 }
 
 .background {
@@ -27,46 +38,26 @@ body {
 }
 
 .shape:first-child {
-  background: linear-gradient(#03960f,
-      #41df4e);
+  background: linear-gradient(var(--shape1-bg-color-first), var(--shape1-bg-color-second));
   left: -120px;
   top: -25px;
 }
-/* .shape:first-child {
-  background: linear-gradient(#1845ad,
-      #23a2f6);
-  left: -80px;
-  top: -80px;
-} */
+
 .shape:last-child {
-  background: linear-gradient(to right,
-      #e45336,
-      #f19007);
+  background: linear-gradient(to right, var(--shape2-bg-color-first), var(--shape2-bg-color-second));
   right: -30px;
   bottom: -80px;
 }
 
-.error-box {
-  height: min-content;
-  width: 90%;
-  background-color: rgba(236, 85, 25, 0.686);
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 10%;
-  left: 50%;
-  border-radius: 10px;
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-  padding: 20px 30px;
-  z-index: 100;
-  color: #ffffff;
+.error {
+  padding: 5px 0px;
+  color: var(--error-message-text-color);
 }
 
-.success-box {
+.success {
   height: min-content;
   width: auto;
-  background-color: rgba(14, 165, 0, 0.686);
+  background-color: var(--success-message-bg-color);
   position: absolute;
   transform: translate(-50%, -50%);
   top: 10%;
@@ -75,7 +66,7 @@ body {
   backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-  padding: 0px 30px;
+  padding: 30px;
   z-index: 100;
   color: #ffffff;
 }
@@ -129,12 +120,17 @@ input {
   display: block;
   height: 50px;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.07);
+  background-color: rgba(88, 84, 84, 0.67);
   border-radius: 3px;
   padding: 0 10px;
   margin-top: 8px;
   font-size: 14px;
   font-weight: 300;
+}
+
+
+.error-input {
+  border: 1px solid var(--error-message-text-color);
 }
 
 ::placeholder {
