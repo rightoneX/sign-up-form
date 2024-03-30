@@ -7,7 +7,7 @@ import Const from '../Constants.js';
 import SuccessMessage from './SuccessMessage.js';
 
 
-const inputFilds = [
+const inputField = [
   { name: 'email', type: 'text', placeholder: Const.EMAIL_PLACEHOLDER },
   { name: 'password', type: 'password', placeholder: Const.PASSWORD_PLACEHOLDER },
   { name: 'confirmPassword', type: 'password', placeholder: Const.CONFIRM_PASSWORD_PLACEHOLDER },
@@ -70,7 +70,7 @@ function SignupForm() {
       <form onSubmit={handleSubmit} data-testid="form">
         <h2>{Const.FORM_SIGN_UP_TITLE}</h2>
 
-        {inputFilds.map((item, index) => (
+        {inputField.map((item, index) => (
           <InputField
             key={index}
             type={item.type}
