@@ -6,6 +6,13 @@ import SubmitButton from './SubmitButton.js';
 import Const from '../Constants.js';
 import SuccessMessage from './SuccessMessage.js';
 
+
+const inputFilds = [
+  { name: 'email', type: 'text', placeholder: Const.EMAIL_PLACEHOLDER },
+  { name: 'password', type: 'password', placeholder: Const.PASSWORD_PLACEHOLDER },
+  { name: 'confirmPassword', type: 'password', placeholder: Const.CONFIRM_PASSWORD_PLACEHOLDER },
+];
+
 function SignupForm() {
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -19,7 +26,6 @@ function SignupForm() {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
-
 
   const validateForm = () => {
     let isValid = true;
@@ -64,32 +70,17 @@ function SignupForm() {
       <form onSubmit={handleSubmit} data-testid="form">
         <h2>{Const.FORM_SIGN_UP_TITLE}</h2>
 
-        <InputField
-          type="text"
-          name="email"
-          value={inputs.email}
-          placeholder={Const.EMAIL_PLACEHOLDER}
-          onChange={handleInputChange}
-          errors={errors.email}
-        />
-
-        <InputField
-          type="password"
-          name="password"
-          value={inputs.password}
-          placeholder={Const.PASSWORD_PLACEHOLDER}
-          onChange={handleInputChange}
-          errors={errors.password}
-        />
-
-        <InputField
-          type="password"
-          name="confirmPassword"
-          value={inputs.confirmPassword}
-          placeholder={Const.CONFIRM_PASSWORD_PLACEHOLDER}
-          onChange={handleInputChange}
-          errors={errors.confirmPassword}
-        />
+        {inputFilds.map((item, index) => (
+          <InputField
+            key={index}
+            type={item.type}
+            name={item.name}
+            value={inputs[item.name]}
+            placeholder={item.placeholder}
+            onChange={handleInputChange}
+            errors={errors[item.name]}
+          />
+        ))}
 
         <SubmitButton
           type="submit"
