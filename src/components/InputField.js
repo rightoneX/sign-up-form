@@ -1,20 +1,19 @@
 import React from 'react'
-import ErrorMessage from './ErrorMessage';
 import classNames from 'classnames';
+import Message from './Message';
 
-
-const InputField = ({ value, name, placeholder, type, onChange, errors }) => {
+const InputField = ({ value, name, placeholder, type, onChange, error }) => {
   return (
     <div className='entry-filed'>
       <input
         type={type}
         value={value}
         name={name}
-        className={classNames('form-control', { 'error-input': errors })}
+        className={classNames('form-control', { 'error-input': error })}
         placeholder={placeholder}
         onChange={onChange}
       />
-      {errors ? <ErrorMessage message={errors} /> : null}
+      {error && <Message message={error} type='error'/>}
     </div>
   )
 }

@@ -4,17 +4,17 @@ import { validationPassword, validationEmail } from '../utilities/inputValidatio
 import InputField from './InputField.js';
 import SubmitButton from './SubmitButton.js';
 import Const from '../Constants.js';
-import SuccessMessage from './SuccessMessage.js';
+import Message from './Message.js';
 
 
-const inputField = [
+const fields = [
   { name: 'email', type: 'text', placeholder: Const.EMAIL_PLACEHOLDER },
   { name: 'password', type: 'password', placeholder: Const.PASSWORD_PLACEHOLDER },
   { name: 'confirmPassword', type: 'password', placeholder: Const.CONFIRM_PASSWORD_PLACEHOLDER },
 ];
 
 function SignupForm() {
-  const [errors, setErrors] = useState({});
+  const [error, setError] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [inputs, setInputs] = useState({
     email: '',
@@ -29,24 +29,24 @@ function SignupForm() {
 
   const validateForm = () => {
     let isValid = true;
-    const newErrors = {};
+    const newError = {};
 
     if (!validationEmail(inputs.email)) {
-      newErrors.email = Const.EMAIL_ERROR;
+      newError.email = Const.EMAIL_ERROR;
       isValid = false;
     }
 
     if (!validationPassword(inputs.password)) {
-      newErrors.password = Const.PASSWORD_ERROR;
+      newError.password = Const.PASSWORD_ERROR;
       isValid = false;
     }
 
     if (inputs.confirmPassword === '' || inputs.password !== inputs.confirmPassword) {
-      newErrors.confirmPassword = Const.CONFIRM_PASSWORD_ERROR;
+      newError.confirmPassword = Const.CONFIRM_PASSWORD_ERROR;
       isValid = false;
     }
 
-    setErrors(newErrors);
+    setError(newError);
     return isValid;
   };
 
@@ -63,14 +63,16 @@ function SignupForm() {
   return (
     <>
       {submitted && (
-        <SuccessMessage
+        <Message
           message={Const.SUCCESS_MESSAGE}
-        />)}
+          type='success'
+        />
+      )}
 
       <form onSubmit={handleSubmit} data-testid="form">
         <h2>{Const.FORM_SIGN_UP_TITLE}</h2>
 
-        {inputField.map((item, index) => (
+        {fields.map((item, index) => (
           <InputField
             key={index}
             type={item.type}
@@ -78,7 +80,7 @@ function SignupForm() {
             value={inputs[item.name]}
             placeholder={item.placeholder}
             onChange={handleInputChange}
-            errors={errors[item.name]}
+            error={error[item.name]}
           />
         ))}
 
